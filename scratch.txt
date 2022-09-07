@@ -1,0 +1,27 @@
+
+        # x = re.findall( r'\x0a\x20(.*?)\x0a', document0)
+        # import pprint
+        # print (pprint.pformat(x))
+        # print (ord(mycharacter),end="")
+
+
+        # for x in range(0,200):
+
+        #     if mycharacterR == mycharacterC:
+        #         print (mycharacterR,end="")
+        #         mycharacterR = document0row.read(1)
+        #         mycharacterC = document0col.read(1)
+
+        #     else:
+        #         print()
+        #         print ("r:", hex(ord(mycharacterR)), "c:",hex(ord(mycharacterC)))
+
+        #         if mycharacterR == "\x0a":
+        #             while mycharacterR in ["\x0a","\x20"]:
+        #                 mycharacterR = document0row.read(1)
+
+        #             while mycharacterC in ["\x0a","\x20"]:
+        #                 mycharacterC = document0col.read(1)
+
+
+
