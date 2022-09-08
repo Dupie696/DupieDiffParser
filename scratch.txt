@@ -1,4 +1,16 @@
 
+            rtell_2 = self.document0row.tell()-1
+            self.document0row.seek(rtell_2)
+            print ("yeah!")
+            rlist = []
+            for r in range(0,5):
+                rhex = hex(ord(self.document0row.read(1)))
+                rlist.append(rhex)        
+
+            print (" ".join(rlist))
+
+
+
         # x = re.findall( r'\x0a\x20(.*?)\x0a', document0)
         # import pprint
         # print (pprint.pformat(x))
