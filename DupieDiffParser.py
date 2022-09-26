@@ -25,4 +25,4 @@ class DupieDiffParser(
 
 
 if __name__ == "__main__":
-    x = cheatSheetParser()
+    x = DupieDiffParser()
