@@ -15,30 +15,17 @@ class pdfQuestionIdentify():
 
         print ("Lengend: _[c,r]")
 
-        y,z = self.skipwhitespace()
-        print (template_string % y, template_string % z)
+        for x in range(0,5):
 
-        y,z = self.debugprint()
-        print ("N:[%(coltell)s,%(rowtell)s]%(character)s(%(hex)s)" % y)
-        print ("N:[%(coltell)s,%(rowtell)s]%(character)s(%(hex)s)" % z)
 
-        print ()
+            if self.mycharacterR in ["\x0a","\x20"] or self.mycharacterC in ["\x0a","\x20"]:
+                self.printer(self.skipwhitespace())
 
-        for x in range(0,1):
+            self.printer(self.showmatches())
 
-            
-            y,z = self.showmatches()
-            print (template_string % y, template_string % z)
+            self.printer(self.debugprint())
 
-            y,z = self.debugprint()
-            print ("N:[%(coltell)s,%(rowtell)s]%(character)s(%(hex)s)" % y)
-            print ("N:[%(coltell)s,%(rowtell)s]%(character)s(%(hex)s)" % z)
 
-            print ()
-
-            y,z = self.seekformatches_skipwhitespace()
-            print ("U:[%(coltell)s,%(rowtell)s]%(matched_string)s" % y)
-            print ("U:[%(coltell)s,%(rowtell)s]%(matched_string)s" % z)
 
             print ()
 
@@ -50,10 +37,10 @@ class pdfQuestionIdentify():
 
     def skipwhitespace(self):
         dto_col = {
-            "coltell1": self.document0col.tell()
+            "coltell1": self.document0col.tell()-1
             }
         dto_row = {
-            "rowtell1": self.document0row.tell()
+            "rowtell1": self.document0row.tell()-1
             }
         rlist = []
         clist = []
@@ -73,7 +60,7 @@ class pdfQuestionIdentify():
         rtell_2 = self.document0row.tell()
 
         dto_col |= {
-            "coltell2": ctell_2-1,
+            "coltell2": ctell_2-2,
             "rowtell1": "x",
             "rowtell2": "x",
             "matched_string":" ".join(clist),
@@ -82,7 +69,7 @@ class pdfQuestionIdentify():
         dto_row |= {
             "coltell1": "x",
             "coltell2": "x",
-            "rowtell2": rtell_2-1,
+            "rowtell2": rtell_2-2,
             "matched_string":" ".join(rlist),
             "symbol": "W"
                 }
@@ -122,18 +109,18 @@ class pdfQuestionIdentify():
         rtell_2 = self.document0row.tell()
 
         dto_col = {
-            "coltell1": dto_col["coltell1"],
-            "coltell2": ctell_2-1,
-            "rowtell1": dto_row["rowtell1"],
-            "rowtell2": rtell_2-1,
+            "coltell1": dto_col["coltell1"] - 1,
+            "coltell2": ctell_2-2,
+            "rowtell1": dto_row["rowtell1"] - 1,
+            "rowtell2": rtell_2-2,
             "matched_string":"".join(mlist),
             "symbol": "M"
                 }
         dto_rows = {
-            "coltell1": dto_col["coltell1"],
-            "coltell2": ctell_2-1,
-            "rowtell1": dto_row["rowtell1"],
-            "rowtell2": rtell_2-1,
+            "coltell1": dto_col["coltell1"] - 1,
+            "coltell2": ctell_2-2,
+            "rowtell1": dto_row["rowtell1"] - 1,
+            "rowtell2": rtell_2-2,
             "matched_string":"".join(mlist),
             "symbol": "M"
                 }
@@ -147,16 +134,22 @@ class pdfQuestionIdentify():
 
     def debugprint(self):
         dto_col = {
-            "coltell": self.document0col.tell(),
-            "rowtell": "x",
+            "coltell1": self.document0col.tell(),
+            "rowtell1": "x",
+            "coltell2": "x",
+            "rowtell2": "x",
             "character": self.mycharacterC,
-            "hex":hex(ord(self.mycharacterC)),
+            "matched_string": "%s(%s)" % (self.mycharacterC, hex(ord(self.mycharacterC))),
+            "symbol": "D"
                 }
         dto_rows = {
-            "coltell": "x",
-            "rowtell": self.document0row.tell(),
+            "coltell1": "x",
+            "rowtell1": self.document0row.tell(),
+            "coltell2": "x",
+            "rowtell2": "x",
             "character": self.mycharacterR,
-            "hex":hex(ord(self.mycharacterR)),
+            "matched_string":"%s(%s)" % (self.mycharacterR, hex(ord(self.mycharacterR))),
+            "symbol": "D"
                 }
         return dto_col,dto_rows
 
